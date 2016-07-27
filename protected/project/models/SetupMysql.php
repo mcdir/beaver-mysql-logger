@@ -4,122 +4,122 @@ namespace models;
 
 class SetupMysql extends \KZ\Model
 {
-	public $dsn;
+    public $dsn;
 
-	public $username;
+    public $username;
 
-	public $password;
+    public $password;
 
-	public $options;
+    public $options;
 
-	/**
-	 * Model
-	 *
-	 * @var \tables\MysqlCredentials
-	 */
-	protected $mysql;
+    /**
+     * Model
+     *
+     * @var \tables\MysqlCredentials
+     */
+    protected $mysql;
 
-	/**
-	 * @var array
-	 */
-	protected $mysqlRow;
+    /**
+     * @var array
+     */
+    protected $mysqlRow;
 
-	public function __construct()
-	{
-		$this->mysql = new \tables\MysqlCredentials();
-		$this->mysqlRow = $this->mysql->find();
+    public function __construct()
+    {
+        $this->mysql = new \tables\MysqlCredentials();
+        $this->mysqlRow = $this->mysql->find();
 
-		if ($this->mysqlRow)
-			$this->setAttributes([
-				'dsn' => $this->mysqlRow['mysql_dsn'],
-				'username' => $this->mysqlRow['mysql_username'],
-				'password' => $this->mysqlRow['mysql_password'],
-				'options' => $this->mysqlRow['mysql_options']
-			]);
+        if ($this->mysqlRow)
+            $this->setAttributes([
+                'dsn' => $this->mysqlRow['mysql_dsn'],
+                'username' => $this->mysqlRow['mysql_username'],
+                'password' => $this->mysqlRow['mysql_password'],
+                'options' => $this->mysqlRow['mysql_options']
+            ]);
 
-		parent::__construct();
-	}
+        parent::__construct();
+    }
 
-	public function rules()
-	{
-		return [
-			'username' => [
-				['required']
-			],
-			'password' => [
-				['required']
-			],
-			'options' => [
-				['validateJson']
-			],
-			'dsn' => [
-				['required'],
-				['validateConnection']
-			],
-		];
-	}
+    public function rules()
+    {
+        return [
+            'username' => [
+                ['required']
+            ],
+            'password' => [
+                ['required']
+            ],
+            'options' => [
+                ['validateJson']
+            ],
+            'dsn' => [
+                ['required'],
+                ['validateConnection']
+            ],
+        ];
+    }
 
-	public function save()
-	{
-		$columns = [
-			'mysql_dsn' => $this->dsn,
-			'mysql_username' => $this->username,
-			'mysql_password' => $this->password,
-			'mysql_options' => $this->options
-		];
+    public function save()
+    {
+        $columns = [
+            'mysql_dsn' => $this->dsn,
+            'mysql_username' => $this->username,
+            'mysql_password' => $this->password,
+            'mysql_options' => $this->options
+        ];
 
-		if ($this->mysqlRow)
-			$this->mysql->updateByPk([$this->mysqlRow['mysql_id']], $columns);
-		else
-			$this->mysql->insert($columns);
+        if ($this->mysqlRow)
+            $this->mysql->updateByPk([$this->mysqlRow['mysql_id']], $columns);
+        else
+            $this->mysql->insert($columns);
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function validateConnection($attribute)
-	{
-		if ($this->getErrors())
-			return;
+    public function validateConnection($attribute)
+    {
+        if ($this->getErrors())
+            return;
 
-		try {
-			$options = $this->options ? json_decode($this->options, true) : [];
-			$pdo = new \PDO($this->dsn, $this->username, $this->password, $options);
-			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-			$pdo->exec('set names utf8');
+        try {
+            $options = $this->options ? json_decode($this->options, true) : [];
+            $pdo = new \PDO($this->dsn, $this->username, $this->password, $options);
+            $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $pdo->exec('set names utf8');
 
-			if (!$this->checkMySqlDb($pdo)) {
-				$this->addError($attribute, 'Database does not contain table "general_log". You must use database "mysql".');
-				return;
-			}
-		} catch (\Exception $e) {
-			$this->addError($attribute, 'Cannot connect to Mysql, with error: "' . $e->getMessage() . '".');
-		}
-	}
+            if (!$this->checkMySqlDb($pdo)) {
+                $this->addError($attribute, 'Database does not contain table "general_log". You must use database "mysql".');
+                return;
+            }
+        } catch (\Exception $e) {
+            $this->addError($attribute, 'Cannot connect to Mysql, with error: "' . $e->getMessage() . '".');
+        }
+    }
 
-	public function validateJson($attribute)
-	{
-		$options = trim($this->options);
+    public function validateJson($attribute)
+    {
+        $options = trim($this->options);
 
-		if (!$options)
-			return;
+        if (!$options)
+            return;
 
-		$result = json_decode($options, true);
-		if (!$result || !is_array($result))
-			$this->addError($attribute, 'It is not valid JSON!');
-	}
+        $result = json_decode($options, true);
+        if (!$result || !is_array($result))
+            $this->addError($attribute, 'It is not valid JSON!');
+    }
 
-	/**
-	 * @param \PDO $pdo
-	 * @return boolean
-	 */
-	protected function checkMySqlDb(\PDO $pdo)
-	{
-		$stmt = $pdo->prepare("show tables like 'general_log'");
-		$stmt->execute();
+    /**
+     * @param \PDO $pdo
+     * @return boolean
+     */
+    protected function checkMySqlDb(\PDO $pdo)
+    {
+        $stmt = $pdo->prepare("show tables like 'general_log'");
+        $stmt->execute();
 
-		$row = $stmt->fetch(\PDO::FETCH_NUM);
-		$stmt->closeCursor();
+        $row = $stmt->fetch(\PDO::FETCH_NUM);
+        $stmt->closeCursor();
 
-		return (boolean) $row;
-	}
+        return (boolean)$row;
+    }
 }

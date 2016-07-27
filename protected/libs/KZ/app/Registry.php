@@ -1,6 +1,7 @@
 <?php
 
 namespace KZ\app;
+
 use KZ\db;
 
 /**
@@ -17,170 +18,170 @@ use KZ\db;
  */
 class Registry extends \KZ\Registry implements interfaces\Registry
 {
-	/**
-	 * @return \PDO
-	 */
-	public function getDb()
-	{
-		return $this->getConnectionStorage()->getDefault();
-	}
+    /**
+     * @return \PDO
+     */
+    public function getDb()
+    {
+        return $this->getConnectionStorage()->getDefault();
+    }
 
-	/**
-	 * @throws \UnderflowException
-	 * @return \KZ\db\interfaces\ConnectionStorage
-	 */
-	public function getConnectionStorage()
-	{
-		$this->checkKey('connectionStorage');
+    /**
+     * @throws \UnderflowException
+     * @return \KZ\db\interfaces\ConnectionStorage
+     */
+    public function getConnectionStorage()
+    {
+        $this->checkKey('connectionStorage');
 
-		return $this->data['connectionStorage'];
-	}
+        return $this->data['connectionStorage'];
+    }
 
-	/**
-	 * @param db\interfaces\ConnectionStorage $connectionStorage
-	 * @return $this
-	 */
-	public function setConnectionStorage(\KZ\db\interfaces\ConnectionStorage $connectionStorage)
-	{
-		$this->data['connectionStorage'] = $connectionStorage;
+    /**
+     * @param db\interfaces\ConnectionStorage $connectionStorage
+     * @return $this
+     */
+    public function setConnectionStorage(\KZ\db\interfaces\ConnectionStorage $connectionStorage)
+    {
+        $this->data['connectionStorage'] = $connectionStorage;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @throws \UnderflowException
-	 * @return \KZ\app\interfaces\Kit
-	 */
-	public function getKit()
-	{
-		$this->checkKey('kit');
+    /**
+     * @throws \UnderflowException
+     * @return \KZ\app\interfaces\Kit
+     */
+    public function getKit()
+    {
+        $this->checkKey('kit');
 
-		return $this->data['kit'];
-	}
+        return $this->data['kit'];
+    }
 
-	/**
-	 * @param \KZ\app\interfaces\Kit $kit
-	 * @return $this
-	 */
-	public function setKit(\KZ\app\interfaces\Kit $kit)
-	{
-		$this->data['kit'] = $kit;
+    /**
+     * @param \KZ\app\interfaces\Kit $kit
+     * @return $this
+     */
+    public function setKit(\KZ\app\interfaces\Kit $kit)
+    {
+        $this->data['kit'] = $kit;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @return array
-	 * @throws \UnderflowException
-	 */
-	public function getConfig()
-	{
-		$this->checkKey('config');
+    /**
+     * @return array
+     * @throws \UnderflowException
+     */
+    public function getConfig()
+    {
+        $this->checkKey('config');
 
-		return $this->data['config'];
-	}
+        return $this->data['config'];
+    }
 
-	/**
-	 * @param array $config
-	 * @return $this
-	 */
-	public function setConfig(array $config)
-	{
-		$this->data['config'] = $config;
+    /**
+     * @param array $config
+     * @return $this
+     */
+    public function setConfig(array $config)
+    {
+        $this->data['config'] = $config;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @throws \UnderflowException
-	 * @return \KZ\controller\Request
-	 */
-	public function getRequest()
-	{
-		$this->checkKey('request');
+    /**
+     * @throws \UnderflowException
+     * @return \KZ\controller\Request
+     */
+    public function getRequest()
+    {
+        $this->checkKey('request');
 
-		return $this->data['request'];
-	}
+        return $this->data['request'];
+    }
 
-	/**
-	 * @param \KZ\controller\Request $request
-	 * @return $this
-	 */
-	public function setRequest(\KZ\controller\Request $request)
-	{
-		$this->data['request'] = $request;
+    /**
+     * @param \KZ\controller\Request $request
+     * @return $this
+     */
+    public function setRequest(\KZ\controller\Request $request)
+    {
+        $this->data['request'] = $request;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @return \KZ\event\Observer
-	 */
-	public function getObserver()
-	{
-		$this->checkKey('observer');
+    /**
+     * @return \KZ\event\Observer
+     */
+    public function getObserver()
+    {
+        $this->checkKey('observer');
 
-		return $this->data['observer'];
-	}
+        return $this->data['observer'];
+    }
 
-	/**
-	 * @param \KZ\event\Observer $observer
-	 * @return $this
-	 */
-	public function setObserver(\KZ\event\Observer $observer)
-	{
-		$this->data['observer'] = $observer;
+    /**
+     * @param \KZ\event\Observer $observer
+     * @return $this
+     */
+    public function setObserver(\KZ\event\Observer $observer)
+    {
+        $this->data['observer'] = $observer;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @return \KZ\flashMessenger\interfaces\FlashMessenger
-	 */
-	public function getFlashMessenger()
-	{
-		$this->checkKey('flashMessenger');
+    /**
+     * @return \KZ\flashMessenger\interfaces\FlashMessenger
+     */
+    public function getFlashMessenger()
+    {
+        $this->checkKey('flashMessenger');
 
-		return $this->data['flashMessenger'];
+        return $this->data['flashMessenger'];
 
-	}
+    }
 
-	/**
-	 * @param \KZ\flashMessenger\interfaces\FlashMessenger $messenger
-	 * @return $this
-	 */
-	public function setFlashMessenger(\KZ\flashMessenger\interfaces\FlashMessenger $messenger)
-	{
-		$this->data['flashMessenger'] = $messenger;
+    /**
+     * @param \KZ\flashMessenger\interfaces\FlashMessenger $messenger
+     * @return $this
+     */
+    public function setFlashMessenger(\KZ\flashMessenger\interfaces\FlashMessenger $messenger)
+    {
+        $this->data['flashMessenger'] = $messenger;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @param \KZ\controller\interfaces\Response $response
-	 * @return $this;
-	 */
-	public function setResponse(\KZ\controller\interfaces\Response $response)
-	{
-		$this->data['response'] = $response;
+    /**
+     * @param \KZ\controller\interfaces\Response $response
+     * @return $this;
+     */
+    public function setResponse(\KZ\controller\interfaces\Response $response)
+    {
+        $this->data['response'] = $response;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @return \KZ\controller\interfaces\Response
-	 */
-	public function getResponse()
-	{
-		$this->checkKey('response');
+    /**
+     * @return \KZ\controller\interfaces\Response
+     */
+    public function getResponse()
+    {
+        $this->checkKey('response');
 
-		return $this->data['response'];
-	}
+        return $this->data['response'];
+    }
 
 
-	protected function checkKey($key)
-	{
-		if (!isset($this->data[$key]))
-			throw new \UnderflowException('You must setup "' . $key . '" before calling this method!');
-	}
+    protected function checkKey($key)
+    {
+        if (!isset($this->data[$key]))
+            throw new \UnderflowException('You must setup "' . $key . '" before calling this method!');
+    }
 } 

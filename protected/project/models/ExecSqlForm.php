@@ -4,34 +4,34 @@ namespace models;
 
 class ExecSqlForm extends \KZ\Model
 {
-	public $threadId;
+    public $threadId;
 
-	public $commandType;
+    public $commandType;
 
-	public $sql;
+    public $sql;
 
-	public $db;
+    public $db;
 
-	public $run;
+    public $run;
 
-	public function rules()
-	{
-		return [
-			'threadId' => [
-				['required']
-			],
-			'commandType' => [
-				['required']
-			],
-			'sql' => [
-				['required']
-			],
-			'db' => [
-				['required']
-			],
-			'run' => [
-				['required']
-			],
-		];
-	}
+    public function rules()
+    {
+        return [
+            'threadId' => [
+                ['required']
+            ],
+            'commandType' => [
+                ['required']
+            ],
+            'sql' => [
+                ['required']
+            ],
+            'db' => [
+                ['required']
+            ],
+            'run' => [
+                ['required']
+            ],
+        ];
+    }
 } 

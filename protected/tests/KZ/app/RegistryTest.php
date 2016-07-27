@@ -3,31 +3,31 @@
 namespace KZ\app;
 
 use KZ\db,
-	KZ\app;
+    KZ\app;
 
 class RegistryTest extends \PHPUnit_Framework_TestCase
 {
-	public function testConnectionStorage()
-	{
-		$sqlite = new db\PDOMock('sqlite');
+    public function testConnectionStorage()
+    {
+        $sqlite = new db\PDOMock('sqlite');
 
-		$cs = new db\ConnectionStorage();
-		$cs->add($sqlite, db\ConnectionStorage::SQLITE, 'db', true);
+        $cs = new db\ConnectionStorage();
+        $cs->add($sqlite, db\ConnectionStorage::SQLITE, 'db', true);
 
-		$registry = new app\Registry();
-		$registry->connectionStorage = $cs;
+        $registry = new app\Registry();
+        $registry->connectionStorage = $cs;
 
-		$this->assertEquals($cs, $registry->getConnectionStorage());
-		$this->assertEquals($sqlite, $registry->getDb());
-	}
+        $this->assertEquals($cs, $registry->getConnectionStorage());
+        $this->assertEquals($sqlite, $registry->getDb());
+    }
 
-	public function testKit()
-	{
-		$kit = new app\Kit([]);
+    public function testKit()
+    {
+        $kit = new app\Kit([]);
 
-		$registry = new app\Registry();
-		$registry->setKit($kit);
+        $registry = new app\Registry();
+        $registry->setKit($kit);
 
-		$this->assertEquals($kit, $registry->getKit());
-	}
+        $this->assertEquals($kit, $registry->getKit());
+    }
 } 

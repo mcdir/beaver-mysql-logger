@@ -1,343 +1,343 @@
 @import "../bootstrap/less/bootstrap.less";
 @import "variables.less";
-
 @import (less) "../datetimepicker/jquery.datetimepicker.css";
 
 body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .container {
-    min-width: @container-desktop;
+  min-width: @container-desktop;
 }
+
 .ajax-loading {
+  width: 100px;
+  height: 100px;
+  background: lighten(@brand-success, 10%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -50px 0 0 -50px;
+  display: none;
+  z-index: 9999;
+  .border-top-radius(@panel-border-radius);
+  .border-bottom-radius(@panel-border-radius);
+
+  div {
+    display: table-cell;
     width: 100px;
     height: 100px;
-    background: lighten(@brand-success, 10%);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin: -50px 0 0 -50px;
-    display: none;
-    z-index: 9999;
-    .border-top-radius(@panel-border-radius);
-    .border-bottom-radius(@panel-border-radius);
-
-    div {
-        display: table-cell;
-        width: 100px;
-        height: 100px;
-        text-align: center;
-        vertical-align: middle;
-        color: @btn-success-color;
-    }
+    text-align: center;
+    vertical-align: middle;
+    color: @btn-success-color;
+  }
 }
 
 .modal-msg {
-    background: #fff;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-    width: 250px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -30px 0 0 -130px;
-    font-size: 140%;
+  background: #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  width: 250px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -30px 0 0 -130px;
+  font-size: 140%;
 }
 
 form {
-    .hint {
-        font-size: @font-size-small;
-        padding-top: (@padding-large-vertical/2);
-    }
+  .hint {
+    font-size: @font-size-small;
+    padding-top: (@padding-large-vertical/2);
+  }
 
-    .errors {
-        color: #a94442;
-        list-style-type: none;
-        padding: 0;
-        margin: 5px 0 0 0;
-    }
+  .errors {
+    color: #a94442;
+    list-style-type: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+  }
 
-    .errors > li {
-        margin: 0 0 5px 0;
-        padding: 0;
-    }
+  .errors > li {
+    margin: 0 0 5px 0;
+    padding: 0;
+  }
 
-    .errors > li:last-of-type {
-        margin-bottom: 0;
-    }
+  .errors > li:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 .bs-callout {
-    margin: (@padding-large-vertical * 2) 0;
-    padding: (@padding-large-vertical * 2);
-    .border-top-radius(@border-radius-small);
-    .border-bottom-radius(@border-radius-small);
-    border-width: 1px 1px 1px 5px;
-    border-color: @gray-lighter;
-    border-style: solid;
+  margin: (@padding-large-vertical * 2) 0;
+  padding: (@padding-large-vertical * 2);
+  .border-top-radius(@border-radius-small);
+  .border-bottom-radius(@border-radius-small);
+  border-width: 1px 1px 1px 5px;
+  border-color: @gray-lighter;
+  border-style: solid;
 
-    h4 {
-        margin-top: 0;
-        margin-bottom: @padding-small-vertical;
-    }
+  h4 {
+    margin-top: 0;
+    margin-bottom: @padding-small-vertical;
+  }
 
-    p:last-child {
-        margin-bottom: 0;
-    }
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .bs-callout-danger {
-    border-left-color: @brand-danger;
+  border-left-color: @brand-danger;
 
-    h4 {
-        color: @brand-danger;
-    }
+  h4 {
+    color: @brand-danger;
+  }
 }
 
 .bs-callout.bs-callout-bg {
-    background: @navbar-default-bg;
+  background: @navbar-default-bg;
 }
 
 .general-log {
-    /* column width */
-    .thread-id {
-        width: 95px;
+  /* column width */
+  .thread-id {
+    width: 95px;
+  }
+
+  .command-type {
+    width: 140px;
+  }
+
+  .event-time {
+    width: 130px;
+  }
+
+  .server-id {
+    width: 100px;
+  }
+
+  .user-host {
+    width: 100px;
+  }
+
+  .grid {
+    thead th {
+      white-space: nowrap;
+      text-align: center;
     }
 
-    .command-type {
-        width: 140px;
+    .another-thread {
+      background: @state-info-bg;
+      text-align: center;
+      font-size: @font-size-small;
+    }
+
+    .thread-id {
+      text-align: center;
+
+      a {
+        text-decoration: underline;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+    }
+
+    .command-type,
+    .server-id {
+
     }
 
     .event-time {
-        width: 130px;
+      .date {
+        color: @gray-light;
+      }
+
+      .time {
+        display: block;
+        text-align: right;
+        margin-bottom: @padding-small-vertical;
+      }
     }
 
-    .server-id {
-        width: 100px;
+    .command-type.type-connect {
+      color: @brand-warning;
     }
 
-    .user-host {
-        width: 100px;
+    .command-type.type-query {
+      color: @brand-info;
     }
 
-    .grid {
-        thead th {
-            white-space: nowrap;
-            text-align: center;
-        }
-
-        .another-thread {
-            background: @state-info-bg;
-            text-align: center;
-            font-size: @font-size-small;
-        }
-
-        .thread-id {
-            text-align: center;
-
-            a {
-                text-decoration: underline;
-            }
-
-            a:hover {
-                text-decoration: none;
-            }
-        }
-
-        .command-type,
-        .server-id {
-
-        }
-
-        .event-time {
-            .date {
-                color: @gray-light;
-            }
-
-            .time {
-                display: block;
-                text-align: right;
-                margin-bottom: @padding-small-vertical;
-            }
-        }
-
-        .command-type.type-connect {
-            color: @brand-warning;
-        }
-
-        .command-type.type-query {
-            color: @brand-info;
-        }
-
-        .command-type.type-quit {
-            color: @gray-light;
-        }
-
-        .command-type.type-init-db {
-            color: @brand-success;
-        }
-
-        .command-type.type-field-list {
-            color: darken(@brand-success, 15%);
-        }
-
-        .argument {
-            max-width: 574px;
-
-            @media (min-width: @screen-md-min) {
-                max-width: 375px;
-            }
-
-            .sql {
-                @sql-max-height: 120px;
-
-                position: relative;
-                max-height: @sql-max-height;
-                overflow-y: hidden;
-                overflow-x: auto;
-                border: 1px solid @pre-border-color;
-                border-radius: @border-radius-base;
-
-                .expand-arrow {
-                    position: absolute;
-                    right: @close-button-position;
-                    top: (@sql-max-height / 2 - 12);
-                    display: none;
-                }
-
-                pre {
-                    margin-bottom: 0;
-                    border: none;
-                }
-
-                @close-button-position: ((@line-height-computed - 1) / 2 + 2);
-
-                .close-top,
-                .close-bottom {
-                    position: absolute;
-                    right: @close-button-position;
-                    display: none;
-                }
-
-                .close-top {
-                    top: @close-button-position;
-                }
-
-                .close-bottom {
-                    bottom: @close-button-position;
-                }
-            }
-
-            .pointer {
-                cursor: pointer;
-            }
-
-            .sql.pointer:hover {
-                .expand-arrow {
-                    display: block;
-                }
-            }
-
-            div.opened {
-                cursor: default;
-                max-height: none;
-
-                .close-top,
-                .close-bottom {
-                    display: block;
-                }
-            }
-
-            .actions {
-                padding-bottom: 0;
-                margin-bottom: 0;
-                padding-top: @padding-large-vertical;
-                text-align: right;
-
-                a {
-                    text-align: left;
-                }
-
-                .exec .btn-group > a {
-                    background: @state-info-bg;
-                }
-
-                .explain .btn-group > a {
-                    background: @state-success-bg;
-                }
-            }
-        }
+    .command-type.type-quit {
+      color: @gray-light;
     }
 
-    .grid-filter {
-        .form-control {
-            padding-left: (@padding-small-horizontal / 2);
-            padding-right: (@padding-small-horizontal / 2);
-        }
-
-        .sort-by {
-            width: auto;
-            display: inline-block;
-        }
-
-        .submit-row {
-            background: @table-bg-accent;
-            text-align: right;
-        }
-
-        .submit-row label {
-            font-size: @font-size-small;
-            font-weight: normal;
-            margin-right: @padding-small-horizontal;
-        }
+    .command-type.type-init-db {
+      color: @brand-success;
     }
+
+    .command-type.type-field-list {
+      color: darken(@brand-success, 15%);
+    }
+
+    .argument {
+      max-width: 574px;
+
+      @media (min-width: @screen-md-min) {
+        max-width: 375px;
+      }
+
+      .sql {
+        @sql-max-height: 120px;
+
+        position: relative;
+        max-height: @sql-max-height;
+        overflow-y: hidden;
+        overflow-x: auto;
+        border: 1px solid @pre-border-color;
+        border-radius: @border-radius-base;
+
+        .expand-arrow {
+          position: absolute;
+          right: @close-button-position;
+          top: (@sql-max-height / 2 - 12);
+          display: none;
+        }
+
+        pre {
+          margin-bottom: 0;
+          border: none;
+        }
+
+        @close-button-position: ((@line-height-computed - 1) / 2 + 2);
+
+        .close-top,
+        .close-bottom {
+          position: absolute;
+          right: @close-button-position;
+          display: none;
+        }
+
+        .close-top {
+          top: @close-button-position;
+        }
+
+        .close-bottom {
+          bottom: @close-button-position;
+        }
+      }
+
+      .pointer {
+        cursor: pointer;
+      }
+
+      .sql.pointer:hover {
+        .expand-arrow {
+          display: block;
+        }
+      }
+
+      div.opened {
+        cursor: default;
+        max-height: none;
+
+        .close-top,
+        .close-bottom {
+          display: block;
+        }
+      }
+
+      .actions {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        padding-top: @padding-large-vertical;
+        text-align: right;
+
+        a {
+          text-align: left;
+        }
+
+        .exec .btn-group > a {
+          background: @state-info-bg;
+        }
+
+        .explain .btn-group > a {
+          background: @state-success-bg;
+        }
+      }
+    }
+  }
+
+  .grid-filter {
+    .form-control {
+      padding-left: (@padding-small-horizontal / 2);
+      padding-right: (@padding-small-horizontal / 2);
+    }
+
+    .sort-by {
+      width: auto;
+      display: inline-block;
+    }
+
+    .submit-row {
+      background: @table-bg-accent;
+      text-align: right;
+    }
+
+    .submit-row label {
+      font-size: @font-size-small;
+      font-weight: normal;
+      margin-right: @padding-small-horizontal;
+    }
+  }
 }
 
 .modal-execute {
-    .result-wrapper {
-        max-width: @modal-lg;
-        overflow: auto;
-        font-size: @font-size-small;
-    }
+  .result-wrapper {
+    max-width: @modal-lg;
+    overflow: auto;
+    font-size: @font-size-small;
+  }
 
-    table {
-        max-width: (@modal-lg - @modal-inner-padding*2);
-    }
+  table {
+    max-width: (@modal-lg - @modal-inner-padding*2);
+  }
 
-    .info {
-        text-align: right;
-    }
+  .info {
+    text-align: right;
+  }
 }
 
 .execute-explain {
-    table {
-        tbody {
-            .possible-keys {
-                word-wrap: break-word;
-                max-width: 230px;
-            }
+  table {
+    tbody {
+      .possible-keys {
+        word-wrap: break-word;
+        max-width: 230px;
+      }
 
-            .ref {
-                word-wrap: break-word;
-                max-width: 200px;
-            }
-        }
+      .ref {
+        word-wrap: break-word;
+        max-width: 200px;
+      }
     }
+  }
 
-    .query {
-        overflow: hidden;
-        max-width: (@modal-lg - @modal-inner-padding*2);
-    }
+  .query {
+    overflow: hidden;
+    max-width: (@modal-lg - @modal-inner-padding*2);
+  }
 }
 
 .execute-sql {
-    .result-wrapper {
-        max-height: 400px;
-        margin-bottom: @padding-base-vertical;
-    }
+  .result-wrapper {
+    max-height: 400px;
+    margin-bottom: @padding-base-vertical;
+  }
 }

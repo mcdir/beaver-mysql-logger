@@ -1,79 +1,73 @@
 if (typeof(kz) == 'undefined' || !kz) {
-	var kz = {};
+    var kz = {};
 }
 
-(function($) {
-	kz.modal = (function() {
-		var instances = {};
+(function ($) {
+    kz.modal = (function () {
+        var instances = {};
 
-		return function modalSingletone (config) {
-			config = $.extend({
-				wrapperSelector : '#modal',
-				bsConfig : {
-					show : false
-				},
-				closeOnFormSuccess : true,
-				elSelector : '.modal-dialog'
-			}, config);
+        return function modalSingletone(config) {
+            config = $.extend({
+                wrapperSelector: '#modal',
+                bsConfig: {
+                    show: false
+                },
+                closeOnFormSuccess: true,
+                elSelector: '.modal-dialog'
+            }, config);
 
-			//singleton part
-			if (typeof(instances[config.wrapperSelector]) != 'undefined')
-				return instances[config.wrapperSelector];
+            //singleton part
+            if (typeof(instances[config.wrapperSelector]) != 'undefined')
+                return instances[config.wrapperSelector];
 
-			if (this && this.constructor === modalSingletone)
-				instances[config.wrapperSelector] = this;
-			else
-				return new modalSingletone(config);
+            if (this && this.constructor === modalSingletone)
+                instances[config.wrapperSelector] = this;
+            else
+                return new modalSingletone(config);
 
-			//prepare args and call parent constructor
-			this.wrapperEl = $(config.wrapperSelector).modal(config.bsConfig);
-			el = this.wrapperEl.find(config.elSelector);
+            //prepare args and call parent constructor
+            this.wrapperEl = $(config.wrapperSelector).modal(config.bsConfig);
+            el = this.wrapperEl.find(config.elSelector);
 
-			kz.modal.superclass.constructor.call(this, el, config);
+            kz.modal.superclass.constructor.call(this, el, config);
 
-			this.setupInstance();
-		};
-	} ());
+            this.setupInstance();
+        };
+    }());
 
-	extend(kz.modal, kz.widget);
+    extend(kz.modal, kz.widget);
 
-	kz.modal.prototype.setupInstance = function()
-	{
-		this.setupFormListeners();
-	}
+    kz.modal.prototype.setupInstance = function () {
+        this.setupFormListeners();
+    }
 
-	kz.modal.prototype.setupFormListeners = function()
-	{
-		var that = this;
-		this.wrapperEl.on('afterSubmit.widget', 'form', function(e, formWidget, data) {
-			if (that.config.closeOnFormSuccess && typeof(data.result) != 'undefined' && data.result)
-				that.hide();
-		});
-	}
+    kz.modal.prototype.setupFormListeners = function () {
+        var that = this;
+        this.wrapperEl.on('afterSubmit.widget', 'form', function (e, formWidget, data) {
+            if (that.config.closeOnFormSuccess && typeof(data.result) != 'undefined' && data.result)
+                that.hide();
+        });
+    }
 
-	kz.modal.prototype.show = function()
-	{
-		this.wrapperEl.modal('show');
-	}
+    kz.modal.prototype.show = function () {
+        this.wrapperEl.modal('show');
+    }
 
-	kz.modal.prototype.hide = function()
-	{
-		this.wrapperEl.modal('hide');
-	}
+    kz.modal.prototype.hide = function () {
+        this.wrapperEl.modal('hide');
+    }
 
-	kz.modal.prototype.load = function(url)
-	{
-		var that = this;
-		$.post(url, {}, function(data) {
-			if (typeof(data.html) != 'undefined')
-				that.replace(data.html);
+    kz.modal.prototype.load = function (url) {
+        var that = this;
+        $.post(url, {}, function (data) {
+            if (typeof(data.html) != 'undefined')
+                that.replace(data.html);
 
-			that.show();
-		}, 'json');
-	}
+            that.show();
+        }, 'json');
+    }
 
-	kz.modal.prototype.makeReplaceSelector = function()
-	{
-		return 'div.modal-dialog';
-	}
-}) (jQuery);
+    kz.modal.prototype.makeReplaceSelector = function () {
+        return 'div.modal-dialog';
+    }
+})(jQuery);

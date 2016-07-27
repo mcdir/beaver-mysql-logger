@@ -4,118 +4,118 @@ namespace KZ\model\interfaces;
 
 interface Model
 {
-	/**
-	 * Returns array with rules.
-	 * Example of rule array:
-	 * <code>
-	 * <?php
-	 * return [
-	 *     'attribute' => [
-	 *         ['methodName', 'option' => 'value'] //options are not necessary
-	 *     ],
-	 *     'attrNoRules' => [] //attributes without rules
-	 * ];
-	 * </code>
-	 *
-	 * @return array
-	 */
-	public function rules();
+    /**
+     * Returns array with rules.
+     * Example of rule array:
+     * <code>
+     * <?php
+     * return [
+     *     'attribute' => [
+     *         ['methodName', 'option' => 'value'] //options are not necessary
+     *     ],
+     *     'attrNoRules' => [] //attributes without rules
+     * ];
+     * </code>
+     *
+     * @return array
+     */
+    public function rules();
 
-	/**
-	 * Set values to model's attributes.
-	 *
-	 * @param array $attributes
-	 * @return $this
-	 */
-	public function setAttributes(array $attributes);
+    /**
+     * Set values to model's attributes.
+     *
+     * @param array $attributes
+     * @return $this
+     */
+    public function setAttributes(array $attributes);
 
-	/**
-	 * Returns array with attributes values.
-	 *
-	 * @return array
-	 */
-	public function getAttributes();
+    /**
+     * Returns array with attributes values.
+     *
+     * @return array
+     */
+    public function getAttributes();
 
-	/**
-	 * Validate attributes.
-	 *
-	 * @return boolean
-	 */
-	public function validate();
+    /**
+     * Validate attributes.
+     *
+     * @return boolean
+     */
+    public function validate();
 
-	/**
-	 * Save changes.
-	 *
-	 * @return $this
-	 */
-	public function save();
+    /**
+     * Save changes.
+     *
+     * @return $this
+     */
+    public function save();
 
-	/**
-	 * Return all errors or errors for given attribute.
-	 *
-	 * @param string $attribute
-	 * @return array
-	 */
-	public function getErrors($attribute = null);
+    /**
+     * Return all errors or errors for given attribute.
+     *
+     * @param string $attribute
+     * @return array
+     */
+    public function getErrors($attribute = null);
 
-	/**
-	 * Clear errors for attribute or for all attributes.
-	 *
-	 * @param string $attribute
-	 * @return $this
-	 */
-	public function clearErrors($attribute = null);
+    /**
+     * Clear errors for attribute or for all attributes.
+     *
+     * @param string $attribute
+     * @return $this
+     */
+    public function clearErrors($attribute = null);
 
-	/**
-	 * Add error to attribute.
-	 *
-	 * @param string $attribute
-	 * @param string $error
-	 * @return $this
-	 */
-	public function addError($attribute, $error);
+    /**
+     * Add error to attribute.
+     *
+     * @param string $attribute
+     * @param string $error
+     * @return $this
+     */
+    public function addError($attribute, $error);
 
-	/**
-	 * Return array with attribute names.
-	 *
-	 * @return array
-	 */
-	public function getAttrNames();
+    /**
+     * Return array with attribute names.
+     *
+     * @return array
+     */
+    public function getAttrNames();
 
-	/**
-	 * @param string $attribute
-	 * @return boolean
-	 */
-	public function hasAttribute($attribute);
+    /**
+     * @param string $attribute
+     * @return boolean
+     */
+    public function hasAttribute($attribute);
 
-	/**
-	 * Returns attribute value.
-	 *
-	 * @param string $attribute
-	 * @return mixed
-	 */
-	public function getAttribute($attribute);
+    /**
+     * Returns attribute value.
+     *
+     * @param string $attribute
+     * @return mixed
+     */
+    public function getAttribute($attribute);
 
-	/**
-	 * Get default value for attribute.
-	 *
-	 * @param string $attribute
-	 * @return mixed
-	 */
-	public function getDefaultValue($attribute);
+    /**
+     * Get default value for attribute.
+     *
+     * @param string $attribute
+     * @return mixed
+     */
+    public function getDefaultValue($attribute);
 
-	/**
-	 * Returns prefix for links or forms for current model.
-	 *
-	 * @return string
-	 */
-	public function getLinkPrefix();
+    /**
+     * Returns prefix for links or forms for current model.
+     *
+     * @return string
+     */
+    public function getLinkPrefix();
 
-	/**
-	 * Returns prefix for links or forms for current model.
-	 *
-	 * @param string$className
-	 * @return string
-	 */
-	public static function getModelPrefix($className);
+    /**
+     * Returns prefix for links or forms for current model.
+     *
+     * @param string $className
+     * @return string
+     */
+    public static function getModelPrefix($className);
 }

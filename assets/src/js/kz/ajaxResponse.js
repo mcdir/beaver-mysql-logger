@@ -1,31 +1,29 @@
 if (typeof(kz) == 'undefined' || !kz) {
-	var kz = {};
+    var kz = {};
 }
 
-(function($) {
-	kz.ajaxResponse = function()
-	{
-	}
+(function ($) {
+    kz.ajaxResponse = function () {
+    }
 
-	kz.ajaxResponse.prototype.response = function(responseJSON)
-	{
-		if (typeof(responseJSON.redirect) == 'string') {
-			kz.util.redirect(responseJSON.redirect);
+    kz.ajaxResponse.prototype.response = function (responseJSON) {
+        if (typeof(responseJSON.redirect) == 'string') {
+            kz.util.redirect(responseJSON.redirect);
 
-			return;
-		}
+            return;
+        }
 
-		if (typeof(responseJSON.reload) == 'boolean' && responseJSON.reload) {
-			kz.util.reload();
+        if (typeof(responseJSON.reload) == 'boolean' && responseJSON.reload) {
+            kz.util.reload();
 
-			return;
-		}
+            return;
+        }
 
-		if (typeof(responseJSON.openPopup) == 'string') {
-			var modal = new kz.modal();
-			modal.load(responseJSON.openPopup);
+        if (typeof(responseJSON.openPopup) == 'string') {
+            var modal = new kz.modal();
+            modal.load(responseJSON.openPopup);
 
-			return;
-		}
-	}
-}) (jQuery);
+            return;
+        }
+    }
+})(jQuery);

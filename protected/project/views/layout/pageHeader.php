@@ -1,7 +1,7 @@
 <?php
-	if (!isset($pageHeader))
-		return;
+if (!isset($pageHeader))
+    return;
 ?>
 <div class="page-header">
-	<h1><?=$pageHeader?></h1>
+    <h1><?= $pageHeader ?></h1>
 </div>

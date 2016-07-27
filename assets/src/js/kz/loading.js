@@ -1,24 +1,21 @@
 if (typeof(kz) == 'undefined' || !kz) {
-	var kz = {};
+    var kz = {};
 }
 
-(function($) {
-	kz.loading = function(config)
-	{
-		this.config = $.extend({
-			selector : '#loading'
-		}, config);
+(function ($) {
+    kz.loading = function (config) {
+        this.config = $.extend({
+            selector: '#loading'
+        }, config);
 
-		this.el = $(this.config.selector);
-	}
+        this.el = $(this.config.selector);
+    }
 
-	kz.loading.prototype.show = function()
-	{
-		this.el.show();
-	}
+    kz.loading.prototype.show = function () {
+        this.el.show();
+    }
 
-	kz.loading.prototype.hide = function()
-	{
-		this.el.hide();
-	}
-}) (jQuery);
+    kz.loading.prototype.hide = function () {
+        this.el.hide();
+    }
+})(jQuery);

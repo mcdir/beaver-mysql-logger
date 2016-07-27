@@ -1,67 +1,67 @@
 <?php
 
 namespace grids;
+
 use KZ\grid;
 use KZ\grid\interfaces;
 
 class GeneralLog extends grid\Grid
 {
-	protected $treadsCount;
+    protected $treadsCount;
 
-	/**
-	 * @var \KZ\model\Filter
-	 */
-	protected $filter;
+    /**
+     * @var \KZ\model\Filter
+     */
+    protected $filter;
 
-	/**
-	 * @param \KZ\model\Filter $filter
-	 * @return $this
-	 */
-	public function setFilter(\KZ\model\Filter $filter)
-	{
-		$this->filter = $filter;
+    /**
+     * @param \KZ\model\Filter $filter
+     * @return $this
+     */
+    public function setFilter(\KZ\model\Filter $filter)
+    {
+        $this->filter = $filter;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @return \models\GeneralLogFilter
-	 */
-	public function getFilter()
-	{
-		return $this->filter;
-	}
+    /**
+     * @return \models\GeneralLogFilter
+     */
+    public function getFilter()
+    {
+        return $this->filter;
+    }
 
-	public function getPager()
-	{
-		$pager = parent::getPager();
-		$pager
-			->setPageSize(100)
-			->setCurrentPage($this->filter->p)
-			->setPageRange(24)
-		;
+    public function getPager()
+    {
+        $pager = parent::getPager();
+        $pager
+            ->setPageSize(100)
+            ->setCurrentPage($this->filter->p)
+            ->setPageRange(24);
 
-		return $pager;
-	}
+        return $pager;
+    }
 
-	/**
-	 * @throws \RuntimeException
-	 * @return array
-	 */
-	public function buildQuery()
-	{
-		if (!$this->filter)
-			throw new \RuntimeException('You must setup filter before calling this method!');
+    /**
+     * @throws \RuntimeException
+     * @return array
+     */
+    public function buildQuery()
+    {
+        if (!$this->filter)
+            throw new \RuntimeException('You must setup filter before calling this method!');
 
-		$this->filter->makeFilters();
+        $this->filter->makeFilters();
 
-		$this->params = [];
-		$where = [];
-		$order = '';
+        $this->params = [];
+        $where = [];
+        $order = '';
 
-		$this->appendFilterCondition($where, $order);
+        $this->appendFilterCondition($where, $order);
 
-		$sql = "
+        $sql = "
 			select
 				t.*,
 				if (
@@ -107,96 +107,96 @@ class GeneralLog extends grid\Grid
 				) as currentDb on currentDb.thread_id = t.thread_id
 		";
 
-		if ($where)
-			$sql .= ' where ' . implode(' and ', $where);
+        if ($where)
+            $sql .= ' where ' . implode(' and ', $where);
 
-		if ($order)
-			$sql .= ' order by ' . $order;
+        if ($order)
+            $sql .= ' order by ' . $order;
 
-		$this->query = $sql;
+        $this->query = $sql;
 
-		return $this->query;
-	}
+        return $this->query;
+    }
 
-	public function reset()
-	{
-		$this->treadsCount = null;
+    public function reset()
+    {
+        $this->treadsCount = null;
 
-		return parent::reset;
-	}
+        return parent::reset;
+    }
 
-	public function getTreadsCount()
-	{
-		if (isset($this->threadsCount))
-			return $this->threadsCount;
+    public function getTreadsCount()
+    {
+        if (isset($this->threadsCount))
+            return $this->threadsCount;
 
-		$stmt = $this->table->makeStmt(
-			$this->buildCountQuery($this->getQuery(), 'count(distinct t.thread_id)'),
-			$this->getParams()
-		);
-		$stmt->execute();
+        $stmt = $this->table->makeStmt(
+            $this->buildCountQuery($this->getQuery(), 'count(distinct t.thread_id)'),
+            $this->getParams()
+        );
+        $stmt->execute();
 
-		$row = $stmt->fetch(\PDO::FETCH_NUM);
-		$stmt->closeCursor();
+        $row = $stmt->fetch(\PDO::FETCH_NUM);
+        $stmt->closeCursor();
 
-		$this->threadsCount = intval($row[0]);
+        $this->threadsCount = intval($row[0]);
 
-		return $this->threadsCount;
-	}
+        return $this->threadsCount;
+    }
 
-	protected function appendFilterCondition(&$where, &$order)
-	{
-		foreach ($this->filter->getAttrNames() as $attr) {
-			$value = $this->filter->getAttribute($attr);
+    protected function appendFilterCondition(&$where, &$order)
+    {
+        foreach ($this->filter->getAttrNames() as $attr) {
+            $value = $this->filter->getAttribute($attr);
 
-			if (!isset($value) || $value == '')
-				continue;
+            if (!isset($value) || $value == '')
+                continue;
 
-			switch ($attr) {
-				case 'threadId':
-					$where[] = 't.thread_id = :threadId';
-					$this->params[':threadId'] = $value;
-					break;
-				case 'serverId':
-					$where[] = 't.server_id = :serverId';
-					$this->params[':serverId'] = $value;
-					break;
-				case 'commandType':
-					$where[] = 't.command_type = :commandType';
-					$this->params[':commandType'] = $value;
-					break;
-				case 'argument':
-					$where[] = 't.argument like :argument';
-					$this->params[':argument'] = '%' . $value . '%';
-					break;
-				case 'eventTime':
-					$where[] = 't.event_time like :eventTime';
-					$this->params[':eventTime'] = $value . '%';
-					break;
-				case 'userHost':
-					$where[] = 't.user_host like :userHost';
-					$this->params[':userHost'] = '%' . $value . '%';
-					break;
-				case 'sortBy':
-					$order = $this->getOrderSql($value);
-					break;
-			}
-		}
-	}
+            switch ($attr) {
+                case 'threadId':
+                    $where[] = 't.thread_id = :threadId';
+                    $this->params[':threadId'] = $value;
+                    break;
+                case 'serverId':
+                    $where[] = 't.server_id = :serverId';
+                    $this->params[':serverId'] = $value;
+                    break;
+                case 'commandType':
+                    $where[] = 't.command_type = :commandType';
+                    $this->params[':commandType'] = $value;
+                    break;
+                case 'argument':
+                    $where[] = 't.argument like :argument';
+                    $this->params[':argument'] = '%' . $value . '%';
+                    break;
+                case 'eventTime':
+                    $where[] = 't.event_time like :eventTime';
+                    $this->params[':eventTime'] = $value . '%';
+                    break;
+                case 'userHost':
+                    $where[] = 't.user_host like :userHost';
+                    $this->params[':userHost'] = '%' . $value . '%';
+                    break;
+                case 'sortBy':
+                    $order = $this->getOrderSql($value);
+                    break;
+            }
+        }
+    }
 
-	protected function getOrderSql($sort)
-	{
-		switch ($sort) {
-			case 'default':
-				return 't2.maxTime desc, t.event_time desc, orderTypeKey desc';
-			case 'event_time_asc':
-				return 't.event_time asc';
-			case 'event_time_desc':
-				return 't.event_time desc';
-			case 'thread_id_asc':
-				return 't.thread_id asc';
-			case 'thread_id_desc':
-				return 't.thread_id desc';
-		}
-	}
+    protected function getOrderSql($sort)
+    {
+        switch ($sort) {
+            case 'default':
+                return 't2.maxTime desc, t.event_time desc, orderTypeKey desc';
+            case 'event_time_asc':
+                return 't.event_time asc';
+            case 'event_time_desc':
+                return 't.event_time desc';
+            case 'thread_id_asc':
+                return 't.thread_id asc';
+            case 'thread_id_desc':
+                return 't.thread_id desc';
+        }
+    }
 } 

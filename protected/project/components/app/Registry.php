@@ -1,6 +1,7 @@
 <?php
 
 namespace components\app;
+
 use KZ\db;
 
 /**
@@ -13,16 +14,16 @@ use KZ\db;
  */
 class Registry extends \KZ\app\Registry
 {
-	/**
-	 * @return \PDO
-	 */
-	public function getMysql()
-	{
-		$mysql = $this->getConnectionStorage()->getByType(db\interfaces\ConnectionStorage::MYSQL);
+    /**
+     * @return \PDO
+     */
+    public function getMysql()
+    {
+        $mysql = $this->getConnectionStorage()->getByType(db\interfaces\ConnectionStorage::MYSQL);
 
-		if (!$mysql)
-			return null;
+        if (!$mysql)
+            return null;
 
-		return $mysql[array_keys($mysql)[0]];
-	}
+        return $mysql[array_keys($mysql)[0]];
+    }
 } 

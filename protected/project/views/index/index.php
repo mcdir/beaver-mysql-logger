@@ -1,9 +1,9 @@
 <?php
-	/** @var \tables\GeneralLog $generalLog */
+/** @var \tables\GeneralLog $generalLog */
 
-	if (!$generalLog->isLogActive()) {
-		echo $this->renderPartial('index/switchOn');
-	}
+if (!$generalLog->isLogActive()) {
+    echo $this->renderPartial('index/switchOn');
+}
 
-	echo $this->renderPartial('index/controls');
-	echo $this->renderPartial('index/grid');
+echo $this->renderPartial('index/controls');
+echo $this->renderPartial('index/grid');

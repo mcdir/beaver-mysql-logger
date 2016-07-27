@@ -1,6 +1,7 @@
 <?php
 
 namespace KZ\view\interfaces;
+
 use KZ\app\interfaces as appInterfaces;
 
 /**
@@ -11,46 +12,46 @@ use KZ\app\interfaces as appInterfaces;
  */
 interface HelperKit
 {
-	/**
-	 * @param array $config
-	 */
-	public function __construct(array $config = []);
+    /**
+     * @param array $config
+     */
+    public function __construct(array $config = []);
 
-	/**
-	 * @param array $config
-	 * @return $this
-	 */
-	public function setConfig(array $config);
+    /**
+     * @param array $config
+     * @return $this
+     */
+    public function setConfig(array $config);
 
-	/**
-	 * @return array
-	 */
-	public function getConfig();
+    /**
+     * @return array
+     */
+    public function getConfig();
 
-	/**
-	 * Check if helper exists or not.
-	 *
-	 * @param $name
-	 * @return boolean
-	 */
-	public function helperExists($name);
+    /**
+     * Check if helper exists or not.
+     *
+     * @param $name
+     * @return boolean
+     */
+    public function helperExists($name);
 
-	/**
-	 * Returns helper instance.
-	 *
-	 * @param $name
-	 * @return Helper
-	 */
-	public function getHelper($name);
+    /**
+     * Returns helper instance.
+     *
+     * @param $name
+     * @return Helper
+     */
+    public function getHelper($name);
 
-	/**
-	 * @param appInterfaces\Registry $registry
-	 * @return $this
-	 */
-	public function setRegistry(appInterfaces\Registry $registry);
+    /**
+     * @param appInterfaces\Registry $registry
+     * @return $this
+     */
+    public function setRegistry(appInterfaces\Registry $registry);
 
-	/**
-	 * @return appInterfaces\Registry
-	 */
-	public function getRegistry();
+    /**
+     * @return appInterfaces\Registry
+     */
+    public function getRegistry();
 } 

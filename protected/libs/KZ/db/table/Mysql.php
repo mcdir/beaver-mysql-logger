@@ -1,31 +1,32 @@
 <?php
 
 namespace KZ\db\table;
+
 use KZ\db;
 
 abstract class Mysql extends db\Table
 {
-	/**
-	 * @var \PDO
-	 */
-	protected static $defaultConnection;
+    /**
+     * @var \PDO
+     */
+    protected static $defaultConnection;
 
-	/**
-	 * @return array
-	 */
-	public function showDatabases()
-	{
-		$stmt = $this->makeStmt('show databases');
-		$stmt->execute();
+    /**
+     * @return array
+     */
+    public function showDatabases()
+    {
+        $stmt = $this->makeStmt('show databases');
+        $stmt->execute();
 
-		$out = array();
-		foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row)
-			$out[] = $row['Database'];
+        $out = array();
+        foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row)
+            $out[] = $row['Database'];
 
-		sort($out);
+        sort($out);
 
-		$stmt->closeCursor();
+        $stmt->closeCursor();
 
-		return $out;
-	}
+        return $out;
+    }
 }

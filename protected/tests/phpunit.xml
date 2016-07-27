@@ -1,6 +1,6 @@
 <phpunit
-    bootstrap="bootstrap.php"
-    colors="true"
+        bootstrap="bootstrap.php"
+        colors="true"
 >
     <testsuite name="Mysqldebug - Testsuite">
         <directory>./</directory>
